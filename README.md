@@ -4,7 +4,7 @@ git pull origin master
 
 git add .          
 
-git commit -m "Mô tả thay đổi"  
+git commit -m "Initial commit"  
 
 git push                        
 _________________________________
