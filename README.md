@@ -1,1 +1,1 @@
-Bài tập Code Ptit ở trong folder src
+Bài tập Code Ptit Java ở trong folder src
