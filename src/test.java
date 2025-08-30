@@ -1,51 +1,67 @@
 import java.util.Scanner;
 
 public class test {
-    static double max (double x, double y, double z){
-        if (x > y && x > z) return x;
-        if (y > x && y > z) return y;
-        return z;
-    }
-
-    static String dientichTamGiac (double x, double y, double z){
-
-        if (x + y > z && x + z > y && y + z > x && x > 0 && y > 0 && z > 0){
-            double p = (x+y+z) / 2;
-            double s = Math.sqrt(p*(p-x)*(p-y)*(p-z));
-            return String.valueOf(s);
+    static class SinhVien{
+        private String maSV, hoVaDem, ten;
+        private int tuoi;
+        private boolean gioitinh;
+        private double diem1, diem2;
+        public SinhVien(){}
+        public void setMaSV(int number){
+            this.maSV = String.format("D22DCCN%d",number);
         }
-        return "khong phai canh tam giac";
-    }
-
-    static double sinx(double x, double epsilon){
-        double term = x;
-        double sum = 0;
-        int n = 0;
-        while (Math.abs(term) > epsilon){
-            sum += term;
-            n += 1;
-            term = Math.pow(-1,n) * Math.pow(x,2 * n + 1) / factorial(2 * n + 1);
+        public void setDiem(double diem1, double diem2){
+            this.diem1 = diem1;
+            this.diem2 = diem2;
         }
-        return  sum;
-    }
-
-    static  long factorial(int n){
-        long r = 1;
-        for (int i = 2; i <= n; i++){
-            r *= i;
+        public String getHoVaTen(){
+            return this.hoVaDem + " " + this.ten;
         }
-        return  r;
+        double getGPA(){
+            return (this.diem1 + this.diem2*2) / 3;
+        }
+        public String getXepLoai(){
+            if (getGPA() > 9) return "xuat sac";
+            if (getGPA() > 8 && getGPA() <= 9) return "gioi";
+            if (getGPA() >= 6.5 && getGPA() < 8) return "kha";
+            if (getGPA() >= 5 && getGPA() < 6.5) return "trung binh";
+            return "yeu";
+        }
+        public void input(){
+            Scanner sc = new Scanner(System.in);
+            int maSV = Integer.parseInt(sc.nextLine());
+            this.hoVaDem = sc.nextLine();
+            this.ten = sc.nextLine();
+            int nhapTuoi = Integer.parseInt(sc.nextLine());
+            while (nhapTuoi < 18 || nhapTuoi > 23){
+                System.out.println("nhap sai tuoi");
+                nhapTuoi = Integer.parseInt(sc.nextLine());
+            }
+            this.tuoi = nhapTuoi;
+            this.gioitinh = sc.nextBoolean();
+            this.diem1 = sc.nextDouble();
+            sc.nextLine();
+            this.diem2 = sc.nextDouble();
+            sc.nextLine();
+            while (this.diem2 < 0 || this.diem2 > 10){
+                System.out.println("nhap sai diem 2");
+                diem2 = sc.nextDouble();
+            }
+            setMaSV(maSV);
+        }
+        void output(){
+            String gioiTinh;
+            if (this.gioitinh) gioiTinh = "nam";
+            else gioiTinh = "nu";
+            System.out.printf("%s %s %d %s %.1f %s\n", this.maSV, getHoVaTen(), this.tuoi, gioiTinh, getGPA(), getXepLoai());
+        }
     }
-
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        double a, b, c,ep;
-        a = in.nextDouble();
-        b = in.nextDouble();
-        c = in.nextDouble();
-        ep = in.nextDouble();
-        System.out.println(max(a, b, c));
-        System.out.println(dientichTamGiac(a, b, c));
-        //System.out.println(String.format("%.4f", sinx(a, ep)));
+
+        SinhVien sv = new SinhVien();
+        sv.input();
+        sv.setDiem(4, 8);
+        sv.output();
+        System.out.println(sv.getHoVaTen() + " " + sv.getXepLoai());
     }
 }
