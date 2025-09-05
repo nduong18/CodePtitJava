@@ -3,36 +3,46 @@ import java.io.IOException;
 import java.util.*;
 
 public class J07071 {
-    static class Ten{
-        private final String ho, ten;
-        public Ten(String ho, String ten){
-            this.ho = ho;
-            this.ten = ten;
-        }
-    }
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(new File("DANHSACH.in"));
         int t = Integer.parseInt(sc.nextLine());
-        HashMap<ArrayList, Ten> dsTen = new HashMap<>();
-        while (t-- > 0) {
-            String s = sc.nextLine();
-            String[] names = s.trim().split("\\s+");
-            ArrayList<String> arr = new ArrayList<>();
-            String ten = names[names.length - 1];
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < names.length - 1; i++) {
-                arr.add(names[i]);
-                sb.append(Character.toUpperCase(names[i].charAt(0))).append(names[i].substring(1)).append(" ");
-            }
-            //dsTen.add(arr, sb.toString().trim());
-            int m = Integer.parseInt(sc.nextLine());
-            while (m-- > 0) {
-                String tuVietTat = sc.nextLine();
-                ArrayList<Character> chr = new ArrayList<>();
-                for (int i = 0; i < tuVietTat.length(); i += 1) {
-                    chr.add(tuVietTat.charAt(i));
+        ArrayList<ArrayList<String>> arr = new ArrayList<>();
+        while (t-- > 0){
+            String[] names = sc.nextLine().trim().split("\\s+");
+            ArrayList<String> ten = new ArrayList<>();
+            Collections.addAll(ten, names);
+            arr.add(ten);
+        }
+        int m = Integer.parseInt(sc.nextLine());
+        while (m-- > 0){
+            String[] names = sc.nextLine().trim().split("\\.");
+            ArrayList<String> result = new ArrayList<>();
+            for (ArrayList<String> as : arr){
+                if (names.length == as.size()){
+                    boolean check = true;
+                    for (int i = 0; i < names.length; i++){
+                        if (!(names[i].equals("*") || names[i].charAt(0) == as.get(i).charAt(0))) {
+                            check = false;
+                            break;
+                        }
+
+                    }
+                    if (check) {
+                        result.add(String.join(" ", as));
+                    }
                 }
             }
+            result.sort((a, b) -> {
+                String[] aa = a.split(" ");
+                String[] bb = b.split(" ");
+                String nameA = aa[aa.length - 1];
+                String nameB = bb[bb.length - 1];
+                String nameA1 = aa[0];
+                String nameB1 = bb[0];
+                if (!nameA.equals(nameB)) return nameA.compareTo(nameB);
+                return nameA1.compareTo(nameB1);
+            });
+            for (String s : result) System.out.println(s);
         }
     }
 }
