@@ -24,7 +24,7 @@ public class J07071 {
                 arr.add(names[i]);
                 sb.append(Character.toUpperCase(names[i].charAt(0))).append(names[i].substring(1)).append(" ");
             }
-            dsTen.add(arr, sb.toString().trim());
+            //dsTen.add(arr, sb.toString().trim());
             int m = Integer.parseInt(sc.nextLine());
             while (m-- > 0) {
                 String tuVietTat = sc.nextLine();
