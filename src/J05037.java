@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class J05036 {
+public class J05037 {
     static class MatHang{
         private String ma, ten, donVi;
         private float donGia, soLuong;
@@ -22,7 +22,8 @@ public class J05036 {
         }
 
         public int getGiaBan(){
-            return getThanhTien() + Math.round((float)getThanhTien() * 2 / 100);
+            float gia = ((float) getThanhTien() + (float) getThanhTien() * 2 / 100) / soLuong;
+            return (int) Math.ceil((gia / 100)) * 100;
         }
 
         @Override
@@ -37,6 +38,9 @@ public class J05036 {
         for (int i = 1; i <= t; i++){
             list.add(new MatHang(i, sc.nextLine().trim(), sc.nextLine().trim(), Integer.parseInt(sc.nextLine().trim()), Integer.parseInt(sc.nextLine().trim())));
         }
+        list.sort((a, b) -> {
+            return Integer.compare(b.getGiaBan(), a.getGiaBan());
+        });
         for (MatHang mh : list) System.out.println(mh);
     }
 }

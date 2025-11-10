@@ -25,30 +25,31 @@ public class J05024 {
         }
         int z = Integer.parseInt(sc.nextLine());
         while (z-- > 0){
-            String s = sc.nextLine().trim().toUpperCase();
+            String s = sc.nextLine().trim();
             String tmp = "";
             switch (s){
-                case "KE TOAN":
+                case "Ke toan":
                     tmp = "KT";
                     break;
-                case "CONG NGHE THONG TIN":
+                case "Cong nghe thong tin":
                     tmp = "CN";
                     break;
-                case "AN TOAN THONG TIN":
+                case "An toan thong tin":
                     tmp = "AT";
                     break;
-                case "VIEN THONG":
+                case "Vien thong":
                     tmp = "VT";
                     break;
-                case "DIEN TU":
+                case "Dien tu":
                     tmp = "DT";
                     break;
                 default:
                     break;
             }
-            System.out.println("DANH SACH SINH VIEN NGANH " + s + ":");
+            System.out.println("DANH SACH SINH VIEN NGANH " + s.toUpperCase() + ":");
             for (SinhVien sv : list) {
-                if (tmp.equals(sv.msv.substring(5,7))){
+                if (tmp.equals(sv.msv.substring(5,7)) ){
+                    if ((tmp.equals("CN") || tmp.equals("AT")) && sv.lop.charAt(0) == 'E') continue;
                     System.out.println(sv);
                 }
             }

@@ -48,6 +48,9 @@ public class J07054 {
                         Double.parseDouble(sc.nextLine()),
                         stt));
             }
+            arr.sort((a, b) ->{
+                return Double.compare(a.diemTB, b.diemTB);
+            });
             int top = 1;
             for (SinhVien sv : arr){
                 sv.showInfo();
